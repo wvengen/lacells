@@ -1,0 +1,53 @@
+#!/bin/sh
+#
+# Simple script to generate lacells.db
+#
+# Downloads CSVs for specified mobile country codes (mcc) from the web,
+# or uses already downloaded CSVs when present.
+#
+# Requirements:
+# * wget
+# * sqlite3
+# 
+
+if [ -z "$1" ]; then
+	echo "Usage: $0 <mcc> [<mcc> ...]"
+	exit
+fi
+
+# Make sure CSVs for country codes are present
+for mcc in $@; do
+	if [ ! -e "lacells-mcc_$mcc.csv" ]; then
+		wget "http://wvengen.github.io/lacells/lacells-mcc_$mcc.csv"
+	fi
+done
+
+[ -e lacells.db ] && mv -f lacells.db lacells.db.bak
+sqlite3 lacells.db <<-SQL
+	PRAGMA synchronous = OFF;
+	PRAGMA journal_mode = OFF;
+
+	CREATE TABLE cells (
+		mcc INTEGER,
+		mnc INTEGER,
+		lac INTEGER,
+		cid INTEGER,
+		longitude REAL,
+		latitude REAL,
+		altitude REAL,
+		accuracy REAL,
+		samples INTEGER
+	);
+	CREATE INDEX _idx1 ON cells (mcc, mnc, lac, cid);
+	CREATE INDEX _idx2 ON cells (lac, cid);
+
+	.mode csv
+	`for mcc in $@; do echo ".import \"lacells-mcc_$mcc.csv\" cells"; done`
+	DELETE from cells WHERE mcc='mcc'; -- any csv header lines
+
+	VACUUM;
+SQL
+
+echo "The file lacells.db was generated with MCCs $@."
+echo "You can upload it to your Android device running Local-GSM-Backend using:"
+echo "   adb push lacells.db /sdcard/.nogapps/lacells.db"

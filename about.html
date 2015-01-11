@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>lacells</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
+  <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
+  <![endif]-->
+  <script src="//cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
+</head>
+<body>
+  <div class="container">
+
+    <nav class="navbar navbar-default">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">lacells</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li><a href="index.html">Map</a></li>
+            <li><a href="table.html">Table</a></li>
+            <li class="active"><a href="about.html">About</a></li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="https://github.com/wvengen/lacells">Github</a></li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div><!--/.container-fluid -->
+    </nav>
+
+    <h1>todo</h1>
+
+    <h2>Use in µg Local-GSM-Backend</h2>
+
+    <p>This data can be used for offline positioning on Android devices using
+    <a href="https://github.com/n76/Local-GSM-Backend">Local-GSM-Backend</a> and µg's 
+    <a href="https://github.com/microg/android_packages_apps_UnifiedNlp">UnifiedNLP</a>.</p>
+
+    <p>Normally you would need to download the complete OpenCellID database, but this
+    repository allows you to just pick the countries you're interested in. The helper
+    script <a href="genlacells">genlacells</a> makes this easy. Download it, give it
+    executable permissions (<tt>chmod +x genlacells</tt>) and run it with the desired
+    MCC numbers as argument (separated by spaces). It will download the files from
+    this websites, and generate a <tt>lacells.db</tt> file with up-to-date locations
+    of cell towers for your country.</p>
+
+
+    <h2>License</h2>
+    
+    <p>The data is aggregated from both
+    <a href="https://location.services.mozilla.com/">Mozilla Location Service</a> and
+    <a href="http://opencellid.org/">OpenCellID</a>. The license for these datasets are
+    <a href="http://creativecommons.org/publicdomain/zero/1.0/">public domain</a> and
+    <a href="http://creativecommons.org/licenses/by-sa/3.0/">CC-BY-SA 3.0</a> respectively.
+    By releasing this dataset under the terms of the CC-BY-SA 3.0 license, the terms of both
+    source licenses are met.</p>
+    
+    <p>In short: you have to mention <a href="http://opencellid.org/">OpenCellID</a> when
+    this dataset is used (but be nice and also mention
+    <a href="https://location.services.mozilla.com/">Mozilla Location Service</a>).
+    And when you re-publish it, use <a href="http://creativecommons.org/licenses/by-sa/3.0/">CC-BY-SA 3.0</a>.</p>
+
+  </div>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+  <script src="//netdna.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+</body>
+</html>

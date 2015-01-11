@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>lacells</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
+  <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
+  <![endif]-->
+  <script src="//cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
+</head>
+<body>
+  <div class="container">
+
+    <nav class="navbar navbar-default">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">lacells</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="index.html">Map</a></li>
+            <li><a href="table.html">Table</a></li>
+            <li><a href="about.html">About</a></li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="https://github.com/wvengen/lacells">Github</a></li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div><!--/.container-fluid -->
+    </nav>
+
+    <div id="map">
+      <script src="http://embed.github.com/view/geojson/wvengen/lacells/gh-pages/lacells-countries.geojson?width=800&height=600"></script>
+      <div style="text-align: right; font-size: 75%">
+        cell data from <a href="https://location.services.mozilla.com/">MLS</a> and
+        <a href="http://opencellid.org/">OpenCellID</a>, licensed under
+        <a href="http://creativecommons.org/licenses/by-sa/3.0/">CC-BY-SA 3.0</a>
+      </div>
+    </div>
+
+  </div>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+  <script src="//netdna.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+  <script type="text/javascript"><!--
+    $('#map iframe').attr('width', '100%');
+  //--></script>
+</body>
+</html>

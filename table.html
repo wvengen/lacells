@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>lacells</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
+  <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
+  <![endif]-->
+  <script src="//cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
+</head>
+<body>
+  <div class="container">
+
+    <nav class="navbar navbar-default">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">lacells</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li><a href="index.html">Map</a></li>
+            <li class="active"><a href="table.html">Table</a></li>
+            <li><a href="about.html">About</a></li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="https://github.com/wvengen/lacells">Github</a></li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div><!--/.container-fluid -->
+    </nav>
+
+    <table class="table table-striped" id="thedata">
+      <thead>
+        <tr>
+          <th>MCC</th>
+          <th>Country</th>
+          <th># cells</th>
+          <th>Longitude</th>
+          <th>Latitude</th>
+          <th>Last updated at</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td colspan="6" id="msg">
+            <em>Please wait while the data is loading...</em>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div style="text-align: right; font-size: 75%">
+      cell data from <a href="https://location.services.mozilla.com/">MLS</a> and 
+      <a href="http://opencellid.org/">OpenCellID</a>, licensed under
+      <a href="http://creativecommons.org/licenses/by-sa/3.0/">CC-BY-SA 3.0</a>
+    </div>
+
+  </div>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+  <script src="//netdna.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.18.4/js/jquery.tablesorter.min.js"></script>
+  <script type="text/javascript"><!--
+    $.ajax({
+      url: 'lacells-countries.csv',
+      dataType: 'text',
+      success: function(data) {
+        parsecsv(data, $('#thedata tbody'));
+      },
+      error: function() {
+        $('#thedata tbody td').html('<em>Sorry, an error occured when loading the data, you could try to reload the page.</em>');
+      }
+    });
+
+    function parsecsv(data, tbody) {
+      var $tbody = $(tbody);
+      var rows = data.split(/\n/);
+      rows.shift(); // remove header line
+      tbody.empty();
+      $.each(rows, function(i, line) {
+        // poor man's csv row parser
+        var fields = $.map(line.split(/,/), function(field) {
+          return field.replace(/"(.*)"/, "$1");
+        });
+        // make some data a bit more pretty
+        fields[5] = new Date(Number(fields[5])*1000);
+        // add row
+        if (fields[0] != '') {
+          $tbody.append('<tr>' + $.map(fields, function(f) {
+            return "<td>" + f + "</td>";
+          }) + '</tr>');
+        }
+      });
+      $('table').tablesorter();
+    }
+  //--></script>
+</body>
+</html>
